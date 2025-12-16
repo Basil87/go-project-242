@@ -1,27 +1,32 @@
-version: "2"
+version: 1
+
 linters:
   enable:
     - gocritic
     - gosec
     - revive
-  settings:
-    revive:
-      severity: warning
-  exclusions:
-    generated: lax
-    presets:
-      - comments
-      - common-false-positives
-      - legacy
-      - std-error-handling
-    rules:
-      - linters:
-          - errcheck
-        path: _test.go
-    paths:
-      - third_party$
-      - builtin$
-      - examples$
+
+linters-settings:
+  revive:
+    severity: warning
+
+issues:
+  exclude-rules:
+    - path: _test.go
+      linters:
+        - errcheck
+
+  exclude-use-default: false
+
+  exclude:
+    - "comment on exported"
+    - "should have a package comment"
+
+  exclude-dirs:
+    - third_party
+    - builtin
+    - examples
+
 formatters:
   exclusions:
     generated: lax
