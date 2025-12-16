@@ -24,9 +24,9 @@ jobs:
         run: go mod download
 
       - name: Run golangci-lint
-        uses: golangci/golangci-lint-action@v7
+        uses: golangci/golangci-lint-action@v8
         with:
-          version: v2.0.0
+          version: latest
 
       - name: Build application
         run: make build
