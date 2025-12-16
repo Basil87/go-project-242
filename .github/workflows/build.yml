@@ -2,9 +2,10 @@ name: Go build and run
 
 on:
   push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+    branches:
+      - '**'
+    tags:
+      - '**'
 
 jobs:
   build:
