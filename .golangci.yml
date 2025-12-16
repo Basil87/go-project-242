@@ -9,16 +9,18 @@ linters:
       severity: warning
   exclusions:
     generated: lax
-    presets:
-      - comments
-      - common-false-positives
-      - legacy
-      - std-error-handling
     rules:
       - linters:
           - errcheck
         path: _test.go
+      - path: (.+)\.go$
+        text: comment on exported
+      - path: (.+)\.go$
+        text: should have a package comment
     paths:
+      - third_party
+      - builtin
+      - examples
       - third_party$
       - builtin$
       - examples$

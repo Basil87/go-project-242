@@ -2,9 +2,10 @@ name: Go build and run
 
 on:
   push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+    branches:
+      - '**'
+    tags:
+      - '**'
 
 jobs:
   build:
@@ -23,9 +24,9 @@ jobs:
         run: go mod download
 
       - name: Run golangci-lint
-        uses: golangci/golangci-lint-action@v6
+        uses: golangci/golangci-lint-action@v8
         with:
-            version: latest
+          version: latest
 
       - name: Build application
         run: make build
