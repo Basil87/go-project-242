@@ -1,6 +1,7 @@
 package main
 
 import (
+	"code/cmd/code"
 	"context"
 	"fmt"
 	"log"
@@ -15,13 +16,22 @@ func main() {
 		Usage: "print size of a file or directory",
 
 		Action: func(ctx context.Context, cmd *cli.Command) error {
-			fmt.Println("Hello from Hexlet!")
+
+			if cmd.Args().Len() == 0 {
+				return fmt.Errorf("path is required")
+			}
+			size, err := code.GetSize(cmd.Args().Get(0))
+			if err != nil {
+				return err
+			}
+
+			fmt.Printf("%d" + "B" + "\t" + "%q\n", size, cmd.Args().Get(0))
 			return nil
 		},
 	}
 
 	cli.RootCommandHelpTemplate = `
-	./bin/hexlet-path-size
+	./bin/hexlet-path-size 
 	
 	NAME:
 		hexlet-path-size - print size of a file or directory
