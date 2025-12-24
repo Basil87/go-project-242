@@ -18,14 +18,15 @@ func main() {
 		Action: func(ctx context.Context, cmd *cli.Command) error {
 
 			if cmd.Args().Len() == 0 {
-				return fmt.Errorf("path is required")
+				fmt.Println("path is required")
+				return nil
 			}
 			size, err := code.GetSize(cmd.Args().Get(0))
 			if err != nil {
 				return err
 			}
 
-			fmt.Printf("%d" + "B" + "\t" + "%q\n", size, cmd.Args().Get(0))
+			fmt.Printf("%d"+"B"+"\t"+"%q\n", size, cmd.Args().Get(0))
 			return nil
 		},
 	}
