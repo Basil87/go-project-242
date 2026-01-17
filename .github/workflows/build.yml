@@ -33,3 +33,6 @@ jobs:
 
       - name: Run application
         run: ./bin/hexlet-path-size
+
+      - name: Run tests
+        run: make test

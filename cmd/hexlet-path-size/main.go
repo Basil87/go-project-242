@@ -1,7 +1,7 @@
 package main
 
 import (
-	"code/cmd/code"
+	"code"
 	"context"
 	"fmt"
 	"log"
