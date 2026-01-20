@@ -29,16 +29,13 @@ func GetSize(path string) (int64, error) {
 }
 
 func HumanSize(size int64, human bool) string {
-	if !human {
-		return fmt.Sprintf("%dB", size)
-	}
 	const unit = 1000
-	if size < unit {
+	if !human || size < unit {
 		return fmt.Sprintf("%dB", size)
 	}
 
 	div, exp := float64(unit), 0
-	for n := float64(size) / unit; n >= unit && exp < 6; n /= unit {
+	for n := float64(size) / unit; n >= unit && exp <= 5; n /= unit {
 		div *= unit
 		exp++
 	}
