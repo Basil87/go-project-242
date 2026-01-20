@@ -38,7 +38,7 @@ func HumanSize(size int64, human bool) string {
 	}
 
 	div, exp := float64(unit), 0
-	for n := float64(size) / unit; n >= unit; n /= unit {
+	for n := float64(size) / unit; n >= unit && exp < 6; n /= unit {
 		div *= unit
 		exp++
 	}
