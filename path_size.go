@@ -1,8 +1,9 @@
 package code
 
 import (
-"os"
-"path/filepath"
+	"fmt"
+	"os"
+	"path/filepath"
 )
 
 func GetSize(path string) (int64, error) {
@@ -25,4 +26,22 @@ func GetSize(path string) (int64, error) {
 	}
 
 	return total, nil
+}
+
+func HumanSize(size int64, human bool) string {
+	if !human {
+		return fmt.Sprintf("%dB", size)
+	}
+	const unit = 1000
+	if size < unit {
+		return fmt.Sprintf("%dB", size)
+	}
+
+	div, exp := float64(unit), 0
+	for n := float64(size) / unit; n >= unit; n /= unit {
+		div *= unit
+		exp++
+	}
+
+	return fmt.Sprintf("%.1f%s", float64(size)/div, []string{"KB", "MB", "GB", "TB", "PB", "EB"}[exp])
 }
