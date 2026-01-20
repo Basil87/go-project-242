@@ -28,6 +28,8 @@ func GetSize(path string) (int64, error) {
 	return total, nil
 }
 
+var meterings = []string{"KB", "MB", "GB", "TB", "PB", "EB"}
+
 func HumanSize(size int64, human bool) string {
 	const unit = 1000
 	if !human || size < unit {
@@ -35,10 +37,10 @@ func HumanSize(size int64, human bool) string {
 	}
 
 	div, exp := float64(unit), 0
-	for n := float64(size) / unit; n >= unit && exp <= 5; n /= unit {
+	for n := float64(size) / unit; n >= unit && exp <= len(meterings) - 1; n /= unit {
 		div *= unit
 		exp++
 	}
 
-	return fmt.Sprintf("%.1f%s", float64(size)/div, []string{"KB", "MB", "GB", "TB", "PB", "EB"}[exp])
+	return fmt.Sprintf("%.1f%s", float64(size)/div, meterings[exp])
 }
