@@ -4,14 +4,19 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"strings"
 )
 
-func GetSize(path string) (int64, error) {
+func GetSize(path string, all bool) (int64, error) {
 	var total int64
 
 	err := filepath.Walk(path, func(p string, info os.FileInfo, err error) error {
 		if err != nil {
 			return err
+		}
+
+		if !all && strings.HasPrefix(info.Name(), ".") {
+			return nil
 		}
 
 		if !info.IsDir() {
@@ -37,7 +42,7 @@ func HumanSize(size int64, human bool) string {
 	}
 
 	div, exp := float64(unit), 0
-	for n := float64(size) / unit; n >= unit && exp <= len(meterings) - 1; n /= unit {
+	for n := float64(size) / unit; n >= unit && exp <= len(meterings)-1; n /= unit {
 		div *= unit
 		exp++
 	}
