@@ -15,7 +15,7 @@ func GetSize(path string, all bool, recursive bool) (int64, error) {
 			return err
 		}
 
-		if !all && strings.HasPrefix(info.Name(), ".") {
+		if !all && !info.IsDir() && strings.HasPrefix(info.Name(), ".") {
 			return nil
 		}
 

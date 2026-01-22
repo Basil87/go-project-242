@@ -29,7 +29,7 @@ func TestGetSize(t *testing.T) {
 	})
 
 	t.Run("directory", func(t *testing.T) {
-		path := filepath.Join(testdata, "dir")
+		path := "testdata"
 
 		size, err := GetSize(path, false, false)
 
@@ -38,7 +38,7 @@ func TestGetSize(t *testing.T) {
 	})
 
 	t.Run("directory recursive", func(t *testing.T) {
-		path := filepath.Join(testdata, "dir")
+		path := "testdata"
 
 		size, err := GetSize(path, false, true)
 
@@ -47,7 +47,7 @@ func TestGetSize(t *testing.T) {
 	})
 
 	t.Run("directory recursive with hidden files", func(t *testing.T) {
-		path := filepath.Join(testdata, "dir")
+		path := "testdata"
 
 		size, err := GetSize(path, true, true)
 
