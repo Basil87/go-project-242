@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-func GetSize(path string, all bool, recursive bool) (int64, error) {
+func GetPathSize(path string, all bool, recursive bool) (int64, error) {
 	var total int64
 
 	err := filepath.Walk(path, func(p string, info os.FileInfo, err error) error {
@@ -39,7 +39,7 @@ func GetSize(path string, all bool, recursive bool) (int64, error) {
 
 var meterings = []string{"KB", "MB", "GB", "TB", "PB", "EB"}
 
-func HumanSize(size int64, human bool) string {
+func FormatSize(size int64, human bool) string {
 	const unit = 1000
 	if !human || size < unit {
 		return fmt.Sprintf("%dB", size)
