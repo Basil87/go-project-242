@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-func GetSize(path string, all bool) (int64, error) {
+func GetSize(path string, all bool, recursive bool) (int64, error) {
 	var total int64
 
 	err := filepath.Walk(path, func(p string, info os.FileInfo, err error) error {
@@ -17,6 +17,10 @@ func GetSize(path string, all bool) (int64, error) {
 
 		if !all && strings.HasPrefix(info.Name(), ".") {
 			return nil
+		}
+
+		if !recursive && info.IsDir() && p != path {
+			return filepath.SkipDir
 		}
 
 		if !info.IsDir() {
