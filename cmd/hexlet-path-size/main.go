@@ -46,7 +46,7 @@ func main() {
 				return err
 			}
 
-			fmt.Printf(size)
+			fmt.Println(size)
 			return nil
 		},
 	}
