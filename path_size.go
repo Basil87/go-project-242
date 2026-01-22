@@ -7,7 +7,17 @@ import (
 	"strings"
 )
 
-func GetPathSize(path string, all bool, recursive bool) (int64, error) {
+func GetPathSize(path string, recursive, human, all bool) (string, error) {
+	size, err := GetSize(path, all, recursive)
+	if err != nil {
+		return "", err
+	}
+
+	output := FormatSize(size, human)
+	return output + " " + path, nil
+}
+
+func GetSize(path string, all bool, recursive bool) (int64, error) {
 	var total int64
 
 	err := filepath.Walk(path, func(p string, info os.FileInfo, err error) error {
@@ -46,7 +56,7 @@ func FormatSize(size int64, human bool) string {
 	}
 
 	div, exp := float64(unit), 0
-	for n := float64(size) / unit; n >= unit && exp <= len(meterings)-1; n /= unit {
+	for n := float64(size) / unit; n >= unit && exp < len(meterings)-1; n /= unit {
 		div *= unit
 		exp++
 	}
