@@ -41,14 +41,12 @@ func main() {
 			}
 
 			path := cmd.Args().Get(0)
-			size, err := code.GetSize(path, cmd.Bool("all"), cmd.Bool("recursive"))
+			size, err := code.GetPathSize(path, cmd.Bool("recursive"), cmd.Bool("human"), cmd.Bool("all"))
 			if err != nil {
 				return err
 			}
 
-			output := code.HumanSize(size, cmd.Bool("human"))
-			fmt.Printf("%s\t%q\n", output, path)
-
+			fmt.Println(size + " " + path);
 			return nil
 		},
 	}

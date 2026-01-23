@@ -2,7 +2,7 @@ package code
 
 import "testing"
 
-func TestHumanSize(t *testing.T) {
+func TestFormatSize(t *testing.T) {
 	tests := []struct {
 		size int64
 		want string
@@ -17,11 +17,10 @@ func TestHumanSize(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.want, func(t *testing.T) {
-			got := HumanSize(tt.size, true)
+			got := FormatSize(tt.size, true)
 			if got != tt.want {
 				t.Fatalf("expected %q, got %q", tt.want, got)
 			}
 		})
 	}
 }
-

@@ -7,6 +7,16 @@ import (
 	"strings"
 )
 
+func GetPathSize(path string, recursive, human, all bool) (string, error) {
+	size, err := GetSize(path, all, recursive)
+	if err != nil {
+		return "", err
+	}
+
+	output := FormatSize(size, human)
+	return output, nil
+}
+
 func GetSize(path string, all bool, recursive bool) (int64, error) {
 	var total int64
 
@@ -39,14 +49,14 @@ func GetSize(path string, all bool, recursive bool) (int64, error) {
 
 var meterings = []string{"KB", "MB", "GB", "TB", "PB", "EB"}
 
-func HumanSize(size int64, human bool) string {
+func FormatSize(size int64, human bool) string {
 	const unit = 1000
 	if !human || size < unit {
 		return fmt.Sprintf("%dB", size)
 	}
 
 	div, exp := float64(unit), 0
-	for n := float64(size) / unit; n >= unit && exp <= len(meterings)-1; n /= unit {
+	for n := float64(size) / unit; n >= unit && exp < len(meterings)-1; n /= unit {
 		div *= unit
 		exp++
 	}
