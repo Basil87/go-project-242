@@ -46,7 +46,7 @@ func main() {
 				return err
 			}
 
-			fmt.Println(size)
+			fmt.Println(size + " " + path);
 			return nil
 		},
 	}
