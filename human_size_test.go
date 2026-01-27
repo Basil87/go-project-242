@@ -17,7 +17,7 @@ func TestFormatSize(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.want, func(t *testing.T) {
-			got := FormatSize(tt.size, true)
+			got := formatSize(tt.size, true)
 			if got != tt.want {
 				t.Fatalf("expected %q, got %q", tt.want, got)
 			}
