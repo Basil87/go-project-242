@@ -28,6 +28,15 @@ func TestGetSize(t *testing.T) {
 		require.Equal(t, int64(0), size)
 	})
 
+	t.Run("empty directory", func(t *testing.T) {
+		path := filepath.Join(testdata, "empty-dir")
+
+		size, err := getSize(path, false, false)
+
+		require.NoError(t, err)
+		require.Equal(t, int64(0), size)
+	})
+
 	t.Run("directory", func(t *testing.T) {
 		path := "testdata"
 
